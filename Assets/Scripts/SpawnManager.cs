@@ -36,6 +36,7 @@ public class SpawnManager : MonoBehaviour
     {
         while (_stopSpawning == false)
         {
+
             if(playerHasTriShot == true)
             {
                 Vector3 spawnPosition = new Vector3(Random.Range(-9.13f, 10.37f), 11.73f, 0);
@@ -53,5 +54,6 @@ public class SpawnManager : MonoBehaviour
                 yield return new WaitForSeconds(1.2f);
             }
         }
+
     }
 }
