@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _livesText;
     [SerializeField] private TextMeshProUGUI _pointsText;
 
+    public AudioSource laserShot;
+    public AudioSource deathExplosion;
+
     [Header("Player Stats")]
     [SerializeField] private int _playerHealth;
     [SerializeField] private float _playerSpeed = 6.5f;
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _playerHealth = 3;
+        
     }
 
     void Start()
@@ -54,6 +58,7 @@ public class PlayerController : MonoBehaviour
             _canFire = Time.time + _fireRate;
             Vector3 offSet = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
             Instantiate(_laserPrefab, offSet, Quaternion.identity);
+            laserShot.Play();
         }
 
         else if (Input.GetKeyDown(KeyCode.Space) && trishotUpgrade == true && Time.time > _canFire || Input.GetMouseButtonDown(0) && trishotUpgrade == true && Time.time > _canFire)
@@ -65,6 +70,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(_laserPrefab, offSetLeft, Quaternion.identity);
             Instantiate(_laserPrefab, offSetCenter, Quaternion.identity);
             Instantiate(_laserPrefab, offSetRight, Quaternion.identity);
+            laserShot.Play();
         }
     }
 
@@ -116,8 +122,9 @@ public class PlayerController : MonoBehaviour
     public void Damage()
     {
         _playerHealth -= 1;
+        deathExplosion.Play();
 
-        if(_playerHealth < 1)
+        if (_playerHealth < 1)
         {
             _livesText.text = "Lives: " + _playerHealth.ToString();
             Destroy(this.gameObject);

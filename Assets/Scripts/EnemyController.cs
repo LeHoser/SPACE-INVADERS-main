@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     public bool _trishotPickedUp;
     public GameObject player;
 
+    public AudioSource deathExplosion;
+
     private void Awake()
     {
         SpawnManager spawnManager = GetComponent<SpawnManager>();
@@ -73,6 +75,7 @@ public class EnemyController : MonoBehaviour
 
             if(_spawnTriShot == true && _trishotPickedUp == true)
             {
+                deathExplosion.Play();
                 Destroy(other.gameObject);
                 Destroy(this.gameObject);
                 Ondeath();

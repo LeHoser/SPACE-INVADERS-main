@@ -55,6 +55,7 @@ MonoBehaviour:
   _spawnTriShot: 0
   _trishotPickedUp: 0
   player: {fileID: 0}
+  deathExplosion: {fileID: 0}
 --- !u!212 &1008156287197785817
 SpriteRenderer:
   m_ObjectHideFlags: 0
