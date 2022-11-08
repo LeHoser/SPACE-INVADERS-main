@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpawnManager _spawnManager;
     [SerializeField] private GameObject _enemy;
     [SerializeField] private GameObject _gameOverText;
+    [SerializeField] private GameObject _restartGameText;
+    [SerializeField] private GameManager _gameManager;
 
     [SerializeField] private TextMeshProUGUI _pointsText;
 
@@ -34,7 +37,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _playerLives = 3;
-
     }
 
     void Start()
@@ -44,7 +46,10 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
+        _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+
         _gameOverText.SetActive(false);
+        _restartGameText.SetActive(false);
 
         if (_spawnManager == null)
         {
@@ -131,11 +136,18 @@ public class PlayerController : MonoBehaviour
         UpdateLives(_playerLives);
 
         deathExplosion.Play();
+    }
+
+    void GameOverSequence()
+    {
+        _gameOverText.SetActive(true);
+        _restartGameText.SetActive(true);
 
         if (_playerLives == 0)
         {
             Destroy(this.gameObject);
             _spawnManager.OnPlayerDeath();
+            _gameManager.GameOver();
         }
     }
 
@@ -170,7 +182,7 @@ public class PlayerController : MonoBehaviour
 
         if(currentLives == 0)
         {
-            _gameOverText.SetActive(true);
+            GameOverSequence();
         }
     }
 

@@ -10,6 +10,7 @@ TagManager:
   - Play Area
   - Trishot
   - HealthPickUp
+  - Game Manager
   layers:
   - Default
   - TransparentFX
