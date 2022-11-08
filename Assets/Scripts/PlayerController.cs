@@ -148,8 +148,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    static public void PointsOnKill()
+    static public void PointsOnKill(int score)
     {
-        playerScore = playerScore + 5;
+        playerScore = playerScore + score;
     }
 }

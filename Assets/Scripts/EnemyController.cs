@@ -133,6 +133,6 @@ public class EnemyController : MonoBehaviour
 
     public void Ondeath()
     {
-        PlayerController.PointsOnKill();
+        PlayerController.PointsOnKill(10);
     }
 }
