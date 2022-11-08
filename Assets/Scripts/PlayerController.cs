@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _enemy;
 
     [SerializeField] private TextMeshProUGUI _pointsText;
+    [SerializeField] private GameObject _gameOver;
 
     [SerializeField] private Image _LivesImage;
     [SerializeField] private Sprite[] _liveSprites;
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _playerLives = 3;
-        
+
     }
 
     void Start()
@@ -43,7 +44,9 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
-        if(_spawnManager == null)
+        _gameOver.SetActive(false);
+
+        if (_spawnManager == null)
         {
             Debug.LogError("The SpawnManager is NULL");
         }
@@ -133,6 +136,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(this.gameObject);
             _spawnManager.OnPlayerDeath();
+            _gameOver.SetActive(true);
         }
     }
 
