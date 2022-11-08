@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,14 +10,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpawnManager _spawnManager;
     [SerializeField] private GameObject _enemy;
 
-    [SerializeField] private TextMeshProUGUI _livesText;
     [SerializeField] private TextMeshProUGUI _pointsText;
+
+    [SerializeField] private Image _LivesImage;
+    [SerializeField] private Sprite[] _liveSprites;
 
     public AudioSource laserShot;
     public AudioSource deathExplosion;
 
     [Header("Player Stats")]
-    [SerializeField] private int _playerHealth;
+    [SerializeField] private int _playerLives;
     [SerializeField] private float _playerSpeed = 6.5f;
     [SerializeField] private float _fireRate = 0.35f;
     [SerializeField] private float _canFire = -1f;
@@ -29,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _playerHealth = 3;
+        _playerLives = 3;
         
     }
 
@@ -50,7 +53,6 @@ public class PlayerController : MonoBehaviour
     {
         CalculateMovement();
 
-        _livesText.text = "Lives: " + _playerHealth.ToString();
         _pointsText.text = "Points: " + playerScore.ToString();
 
         if (Input.GetKeyDown(KeyCode.Space) && trishotUpgrade == false && Time.time > _canFire || Input.GetMouseButtonDown(0) && trishotUpgrade == false && Time.time > _canFire)
@@ -86,9 +88,9 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space) && trishotUpgrade == true && Time.time > _canFire || Input.GetMouseButtonDown(0) && trishotUpgrade == true && Time.time > _canFire)
         {
             _canFire = Time.time + _fireRate;
-            Vector3 offSetLeft = new Vector3(transform.position.x - 0.2f, transform.position.y + 1, 0);
-            Vector3 offSetCenter = new Vector3(transform.position.x, transform.position.y + 1, 0);
-            Vector3 offSetRight = new Vector3(transform.position.x + 0.2f, transform.position.y + 1, 0);
+            Vector3 offSetLeft = new Vector3(transform.position.x - 10f, transform.position.y + 1, 0);
+            Vector3 offSetCenter = new Vector3(transform.position.x, transform.position.y + 1.5f, 0);
+            Vector3 offSetRight = new Vector3(transform.position.x + 10f, transform.position.y + 1, 0);
             Instantiate(_laserPrefab, offSetLeft, Quaternion.identity);
             Instantiate(_laserPrefab, offSetCenter, Quaternion.identity);
             Instantiate(_laserPrefab, offSetRight, Quaternion.identity);
@@ -121,12 +123,14 @@ public class PlayerController : MonoBehaviour
 
     public void Damage()
     {
-        _playerHealth -= 1;
+        _playerLives -= 1;
+
+        UpdateLives(_playerLives);
+
         deathExplosion.Play();
 
-        if (_playerHealth < 1)
+        if (_playerLives < 0)
         {
-            _livesText.text = "Lives: " + _playerHealth.ToString();
             Destroy(this.gameObject);
             _spawnManager.OnPlayerDeath();
         }
@@ -143,9 +147,23 @@ public class PlayerController : MonoBehaviour
         }
         if(other.CompareTag("HealthPickUp"))
         {
-            _playerHealth += 1;
-            Destroy(other.gameObject);
+            if(_playerLives >= 3)
+            {
+                Destroy(other.gameObject);
+            }
+
+            else
+            {
+                _playerLives += 1;
+                Destroy(other.gameObject);
+                UpdateLives(_playerLives);
+            }
         }
+    }
+
+    public void UpdateLives(int currentLives)
+    {
+        _LivesImage.sprite = _liveSprites[currentLives];
     }
 
     static public void PointsOnKill(int score)
