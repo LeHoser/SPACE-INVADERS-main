@@ -495,8 +495,8 @@ MonoBehaviour:
   _laserPrefab: {fileID: 2424984797568140721, guid: 22c4a4d0562fc5643803987a77aaadd3, type: 3}
   _spawnManager: {fileID: 822250532}
   _enemy: {fileID: 6658374867603644901, guid: 8b0b440a00109c340845fdadd59bad0b, type: 3}
+  _gameOverText: {fileID: 854979984}
   _pointsText: {fileID: 554880636}
-  _gameOver: {fileID: 854979986}
   _LivesImage: {fileID: 1480223017}
   _liveSprites:
   - {fileID: 21300000, guid: ba53e111f0125654cabfd4eefaf3a657, type: 3}
@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 854979987}
   - component: {fileID: 854979986}
   m_Layer: 5
-  m_Name: GameOver Test
+  m_Name: GameOver Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

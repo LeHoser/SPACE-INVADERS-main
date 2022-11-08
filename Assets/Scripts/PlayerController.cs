@@ -9,9 +9,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private SpawnManager _spawnManager;
     [SerializeField] private GameObject _enemy;
+    [SerializeField] private GameObject _gameOverText;
 
     [SerializeField] private TextMeshProUGUI _pointsText;
-    [SerializeField] private GameObject _gameOver;
 
     [SerializeField] private Image _LivesImage;
     [SerializeField] private Sprite[] _liveSprites;
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
-        _gameOver.SetActive(false);
+        _gameOverText.SetActive(false);
 
         if (_spawnManager == null)
         {
@@ -132,11 +132,10 @@ public class PlayerController : MonoBehaviour
 
         deathExplosion.Play();
 
-        if (_playerLives < 0)
+        if (_playerLives == 0)
         {
             Destroy(this.gameObject);
             _spawnManager.OnPlayerDeath();
-            _gameOver.SetActive(true);
         }
     }
 
@@ -168,6 +167,11 @@ public class PlayerController : MonoBehaviour
     public void UpdateLives(int currentLives)
     {
         _LivesImage.sprite = _liveSprites[currentLives];
+
+        if(currentLives == 0)
+        {
+            _gameOverText.SetActive(true);
+        }
     }
 
     static public void PointsOnKill(int score)
