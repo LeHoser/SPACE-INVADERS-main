@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
         _gameOverText.SetActive(false);
         _restartGameText.SetActive(false);
 
+        playerScore = 0;
+
         if (_spawnManager == null)
         {
             Debug.LogError("The SpawnManager is NULL");
