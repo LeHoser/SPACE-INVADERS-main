@@ -14,7 +14,9 @@ public class EnemyController : MonoBehaviour
     public bool _trishotPickedUp;
     public GameObject player;
 
-    public AudioSource deathExplosion;
+    //[SerializeField] private GameObject _deathExplosionSoundPrefab;
+
+    //[SerializeField] static public AudioSource deathExplosion;
 
     private void Awake()
     {
@@ -75,7 +77,6 @@ public class EnemyController : MonoBehaviour
 
             if(_spawnTriShot == true && _trishotPickedUp == true)
             {
-                deathExplosion.Play();
                 Destroy(other.gameObject);
                 Destroy(this.gameObject);
                 Ondeath();
@@ -122,6 +123,7 @@ public class EnemyController : MonoBehaviour
                 player.Damage();
             }
             other.transform.GetComponent<PlayerController>().Damage();
+            
             Destroy(this.gameObject);
         }
     }
