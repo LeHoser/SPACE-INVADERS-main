@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(BasicEnemySpawn());
+        StartCoroutine(EnemySpawner());
         //AlternateEnemySpawn();
         _stopSpawning = false;
         playerHasTriShot = false;
@@ -34,7 +34,7 @@ public class SpawnManager : MonoBehaviour
         _stopSpawning = true;
     }
 
-    IEnumerator BasicEnemySpawn()
+    IEnumerator EnemySpawner()
     {
         while (_stopSpawning == false)
         {

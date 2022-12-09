@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySpeed: 5
-  _rotateSpeed: 10
+  _rotateSpeed: 25
   _altEnemy: {fileID: 1408399400932251738}
   _player: {fileID: 0}
   _miniEnemy: {fileID: 1408399400932251738, guid: f8bca2e2a151d654190f627dfc46d5a1, type: 3}

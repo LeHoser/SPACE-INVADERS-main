@@ -5,6 +5,7 @@ using UnityEngine;
 public class MiniEnemyController : MonoBehaviour
 {
     [SerializeField] private float _enemySpeed = 3.0f;
+    [SerializeField] private float _rotateSpeed = 10.0f;
 
     public GameObject miniEnemy;
     public GameObject player;
@@ -29,8 +30,8 @@ public class MiniEnemyController : MonoBehaviour
 
     void CalculateEnemyMovement()
     {
-        Vector3 direction = new Vector3(0, -1 * _enemySpeed, 0) * Time.deltaTime;
-        transform.Translate(direction);
+        transform.Rotate(Vector3.forward * _rotateSpeed * Time.deltaTime);
+        transform.Translate(Vector3.down * _enemySpeed * Time.deltaTime, Space.World);
 
         Vector3 randomX = new Vector3(Random.Range(-9.13f, 10.37f), 10f, 0);
         if (transform.position.y < -5.6f)

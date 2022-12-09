@@ -26,10 +26,12 @@ public class AltEnemyController : MonoBehaviour
 
     void CalculateEnemyMovement()
     {
-        //transform.Rotate(Vector3.forward * _rotateSpeed * Time.deltaTime); Causes enemy to veer off in random direction :(
+        transform.Rotate(Vector3.forward * _rotateSpeed * Time.deltaTime); // Causes enemy to veer off in random direction :(
 
-        Vector3 direction = new Vector3(0, -1 * _enemySpeed, 0) * Time.deltaTime;
-        transform.Translate(direction);
+        //Vector3 direction = new Vector3(0, -1 * _enemySpeed, 0) * Time.deltaTime;
+        //transform.Translate(direction);
+
+        transform.Translate(Vector3.down * _enemySpeed * Time.deltaTime, Space.World); // adding Space.World keeps object moving down regardless of rotation
 
         Vector3 randomX = new Vector3(Random.Range(-9.13f, 10.37f), 10f, 0);
         if (transform.position.y < -5.6f)
