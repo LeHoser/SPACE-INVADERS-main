@@ -58,8 +58,8 @@ public class AltEnemyController : MonoBehaviour
 
             Debug.Log("Laser hit");
             Destroy(other.gameObject);
-            Vector3 spawnPosition = new Vector3(transform.position.x + 3.0f, transform.position.y, 0);
-            Vector3 otherSpawnPosition = new Vector3(transform.position.x + -3.0f, transform.position.y, 0);
+            Vector3 spawnPosition = new Vector3(transform.position.x + 3.0f, transform.position.y + Random.Range(-0.5f, 4.0f), 0);
+            Vector3 otherSpawnPosition = new Vector3(transform.position.x + -3.0f, transform.position.y + Random.Range(-0.5f, 4.0f), 0);
             GameObject newEnemy = Instantiate(_miniEnemy, spawnPosition, Quaternion.identity);
             GameObject otherNewEnemy = Instantiate(_miniEnemy, otherSpawnPosition, Quaternion.identity);
             Destroy(this.gameObject);

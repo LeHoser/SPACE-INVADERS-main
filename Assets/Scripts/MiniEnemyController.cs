@@ -9,6 +9,12 @@ public class MiniEnemyController : MonoBehaviour
     public GameObject miniEnemy;
     public GameObject player;
 
+    [SerializeField] private TripleShot _trishot;
+    [SerializeField] private HealthPickUp _healthPickUp;
+    [SerializeField] private bool _spawnHealthPickUp;
+    public bool _spawnTriShot;
+    public bool _trishotPickedUp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +41,66 @@ public class MiniEnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        int spawnNumber = 10;
+        int randomChance = Random.Range(1, 11);
+
+        int healthSpawnNumber = 15;
+        int healthSpawnChance = Random.Range(1, 16);
+
+        if (spawnNumber > randomChance)
+        {
+            _spawnTriShot = false;
+        }
+
+        else if (spawnNumber == randomChance && _trishotPickedUp == false)
+        {
+            _spawnTriShot = true;
+        }
+
+        else if (spawnNumber == randomChance && _trishotPickedUp == true)
+        {
+            _spawnTriShot = false;
+        }
+
+        if (_spawnTriShot == true && _trishotPickedUp == true)
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+            Ondeath();
+        }
+
+        else if (_spawnTriShot == true && _trishotPickedUp == false)
+        {
+            Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, 0);
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+            Instantiate(_trishot, spawnPosition, Quaternion.identity);
+            Ondeath();
+        }
+
+        else if (_spawnTriShot == false)
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+            Ondeath();
+        }
+
+        if (healthSpawnNumber == healthSpawnChance)
+        {
+            Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, 0);
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+            Instantiate(_healthPickUp, spawnPosition, Quaternion.identity);
+            Ondeath();
+        }
+        else if (healthSpawnNumber > healthSpawnChance)
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+            Ondeath();
+        }
+
+        /*if (other.CompareTag("Player"))
         {
             Debug.Log("Player hit");
             PlayerController player = GetComponent<PlayerController>();
@@ -56,7 +121,7 @@ public class MiniEnemyController : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(this.gameObject);
             Ondeath();
-        }
+        }*/
     }
 
     public void Ondeath()

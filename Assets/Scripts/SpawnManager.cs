@@ -59,7 +59,7 @@ public class SpawnManager : MonoBehaviour
             Vector3 spawnAltEnemy = new Vector3(Random.Range(-9.13f, 10.37f), 11.73f, 0);
             GameObject newAltEnemy = Instantiate(_alternateEnemy, spawnAltEnemy, Quaternion.identity);
             newAltEnemy.transform.parent = _enemyContainer.transform;
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(3.0f);
         }
 
     }

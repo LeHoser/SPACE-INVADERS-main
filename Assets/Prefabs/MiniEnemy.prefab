@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6982798138781432260}
-  - component: {fileID: -5616602632460242569}
   - component: {fileID: 2737203365596991306}
   - component: {fileID: 5674998777297196748}
   - component: {fileID: 3577816234579322356}
@@ -36,23 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5616602632460242569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1408399400932251738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51235480498e47f42abfb7045af43cf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemySpeed: 0
-  _rotateSpeed: 10
-  _altEnemy: {fileID: 1408399400932251738, guid: 03bfe13ae9cbbad4e90589e104797b7c, type: 3}
-  _player: {fileID: 0}
-  _miniEnemy: {fileID: 1408399400932251738}
 --- !u!212 &2737203365596991306
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -167,3 +149,8 @@ MonoBehaviour:
   _enemySpeed: 3.7
   miniEnemy: {fileID: 1408399400932251738}
   player: {fileID: 0}
+  _trishot: {fileID: -3445168535201934407, guid: 74c2a7c2d404d16448e0b8fb292779c7, type: 3}
+  _healthPickUp: {fileID: -1310981835744486768, guid: 4a9277ec189f9574bb4bdbb815d68eb3, type: 3}
+  _spawnHealthPickUp: 0
+  _spawnTriShot: 0
+  _trishotPickedUp: 0
