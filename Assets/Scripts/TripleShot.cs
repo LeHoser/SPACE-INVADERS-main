@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TripleShot : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _moveSpeed = 5.0f;
 
     private void Awake()
     {
@@ -19,9 +19,8 @@ public class TripleShot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _moveSpeed = 0.5f;
-        Vector3 direction = new Vector3(0, -1 * _moveSpeed * Time.deltaTime, 0);
-        transform.Translate(direction);
+        
+        transform.Translate(Vector3.down * _moveSpeed *Time.deltaTime);
 
         if(transform.position.y < -5.6f)
         {

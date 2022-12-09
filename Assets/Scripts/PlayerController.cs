@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private SpawnManager _spawnManager;
     [SerializeField] private GameObject _enemy;
+    [SerializeField] private GameObject _altEnemy;
     [SerializeField] private GameObject _gameOverText;
     [SerializeField] private GameObject _restartGameText;
     [SerializeField] private GameManager _gameManager;

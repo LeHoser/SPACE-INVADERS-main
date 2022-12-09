@@ -7,6 +7,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private GameObject _enemyContainer;
+    [SerializeField] private GameObject _alternateEnemy;
 
     public bool playerHasTriShot;
 
@@ -14,7 +15,8 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(SpawnRoutine());
+        StartCoroutine(BasicEnemySpawn());
+        //AlternateEnemySpawn();
         _stopSpawning = false;
         playerHasTriShot = false;
     }
@@ -32,7 +34,7 @@ public class SpawnManager : MonoBehaviour
         _stopSpawning = true;
     }
 
-    IEnumerator SpawnRoutine()
+    IEnumerator BasicEnemySpawn()
     {
         while (_stopSpawning == false)
         {
@@ -53,7 +55,20 @@ public class SpawnManager : MonoBehaviour
                 newEnemy.transform.parent = _enemyContainer.transform;
                 yield return new WaitForSeconds(1.2f);
             }
+
+            Vector3 spawnAltEnemy = new Vector3(Random.Range(-9.13f, 10.37f), 11.73f, 0);
+            GameObject newAltEnemy = Instantiate(_alternateEnemy, spawnAltEnemy, Quaternion.identity);
+            newAltEnemy.transform.parent = _enemyContainer.transform;
+            yield return new WaitForSeconds(5f);
         }
 
     }
+
+    /*IEnumerator AlternateEnemySpawn()
+    {
+        Vector3 spawnPosition = new Vector3(Random.Range(-9.13f, 10.37f), 11.73f, 0);
+        GameObject newEnemy = Instantiate(_alternateEnemy, spawnPosition, Quaternion.identity);
+        newEnemy.transform.parent = _enemyContainer.transform;
+        yield return new WaitForSeconds(3f);
+    }*/
 }
